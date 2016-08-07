@@ -221,7 +221,7 @@ R.create "OutlineItem",
       if quadrance < bestDropSpot.quadrance
         bestDropSpot = {quadrance, outlineChildrenEl, beforeOutlineTreeEl}
 
-    allowedDraggingClasses = element.getAllowedShapeInterpretationContext().map((interpretationContext) -> 
+    allowedDraggingClasses = element.getAllowedShapeInterpretationContext().map((interpretationContext) ->
       ".OutlineChildren." + interpretationContext).join(", ")
 
     # All the places within which we could drop.

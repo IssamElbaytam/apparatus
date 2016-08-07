@@ -74,6 +74,8 @@ R.create "NovelAttributesList",
   contextTypes:
     project: Model.Project
 
+  mixins: [R.AnnotateMixin]
+
   render: ->
     {element} = @props
     {project} = @context
@@ -82,7 +84,7 @@ R.create "NovelAttributesList",
       for attribute, i in element.allAttributes()
         shouldShow = attribute.isNovel() or attribute.isVariantOf(Model.Variable)
         if shouldShow
-          R.AttributeRow {key: i, attribute}
+          R.AttributeRow {key: Util.getId(attribute), attribute}
       if element == project.editingElement
         R.div {className: "AddVariableRow"},
           R.button {className: "AddButton Interactive", onClick: @_addVariable}
@@ -90,3 +92,7 @@ R.create "NovelAttributesList",
   _addVariable: ->
     {element} = @props
     element.addVariable()
+
+  annotation: ->
+    # Used for drag reording.
+    {element: @props.element}

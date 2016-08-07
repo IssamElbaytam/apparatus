@@ -107,6 +107,11 @@ module.exports = Element = NodeWithAttributes.createVariant
     for component in @components()
       continue unless component.controllableAttributes?
       for attribute in component.controllableAttributes()
+        if not attribute
+          console.log("BAD ELEMENT!")
+          console.log(@label)
+          console.log(component.label)
+          console.log(_.pluck(component.children(), "label"))
         result.push(attribute)
         result.push(attribute.dependencies()...)
     if @parent()
@@ -158,6 +163,9 @@ module.exports = Element = NodeWithAttributes.createVariant
   allDependencies: (attributes) ->
     result = []
     for attribute in attributes
+      if not attribute
+        console.log("BAD ELEMENT!")
+        console.log(@label)
       result.push(attribute)
       result.push(attribute.dependencies()...)
     return _.unique(result)
